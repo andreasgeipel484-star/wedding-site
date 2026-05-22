@@ -57,22 +57,21 @@
             left: 0; 
             right: 0; 
             bottom: 0;
-            /* Ссылка на сгенерированную карту */
             background-image: url('http://googleusercontent.com/image_generation_content/6');
             background-size: cover; 
             background-position: center 20%;
             background-repeat: repeat-y;
-            opacity: 0.6; /* Легкая прозрачность, чтобы не перебивать текст */
+            opacity: 0.6;
             z-index: 0;
             pointer-events: none;
-            mix-blend-mode: multiply; /* Для красивого наложения на фон */
+            mix-blend-mode: multiply;
         }
 
         section {
             padding: 40px 25px;
             text-align: center;
             position: relative;
-            z-index: 1; /* Чтобы контент был поверх карты */
+            z-index: 1;
         }
 
         h1, h2, h3, h4 { 
@@ -80,13 +79,11 @@
             font-weight: normal; 
         }
 
-        /* ==========================================================================
-           1. ЗАГЛАВНЫЙ ЭКРАН С АНИМАЦИЕЙ
-           ========================================================================== */
+        /* 1. ЗАГЛАВНЫЙ ЭКРАН С АНИМАЦИЕЙ */
         .welcome-screen {
             height: 100vh;
             position: relative;
-            background: transparent; /* Чтобы было видно карту */
+            background: transparent;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -217,9 +214,7 @@
             transform: scale(0.95);
         }
 
-        /* ==========================================================================
-           2. СКРЫТЫЙ БЛОК БИЛЕТА
-           ========================================================================== */
+        /* 2. СКРЫТЫЙ БЛОК БИЛЕТА */
         #ticket-content {
             display: none; 
             opacity: 0;
@@ -246,9 +241,7 @@
         .manifest-item .lbl { font-size: 10px; text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 3px; }
         .manifest-item .val { font-size: 14px; font-weight: 600; color: var(--text-dark); }
 
-        /* ==========================================================================
-           3. ДОПОЛНИТЕЛЬНЫЙ БЛОК: ПРИВЕТСТВИЕ И КАЛЕНДАРЬ
-           ========================================================================== */
+        /* 3. ДОПОЛНИТЕЛЬНЫЙ БЛОК: ПРИВЕТСТВИЕ И КАЛЕНДАРЬ */
         .intro-text-block {
             padding: 50px 20px 30px;
             text-align: center;
@@ -335,9 +328,7 @@
             z-index: -1;
         }
 
-        /* ==========================================================================
-           4. ХРОНОЛОГИЯ ПОЛЕТА
-           ========================================================================== */
+        /* 4. ХРОНОЛОГИЯ ПОЛЕТА */
         .timeline-section { 
             background-color: rgba(243, 245, 242, 0.85); 
             padding-top: 60px; 
@@ -404,9 +395,7 @@
         .dashed-line { flex-grow: 1; border-bottom: 1px dashed var(--sage-dark); height: 1px; opacity: 0.6; }
         .step-time { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-dark); white-space: nowrap; }
 
-        /* ==========================================================================
-           5. ОСТАЛЬНЫЕ БЛОКИ
-           ========================================================================== */
+        /* 5. ОСТАЛЬНЫЕ БЛОКИ */
         .info-block { margin-bottom: 35px; }
         .info-block p { font-size: 14px; line-height: 1.6; color: #555; max-width: 90%; margin: 0 auto; }
         .info-block .icon-circle { width: 50px; height: 50px; background-color: var(--sage); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin: 0 auto; box-shadow: 0 0 0 6px rgba(243, 245, 242, 0.7); }
@@ -466,7 +455,7 @@
             gap: 12px; 
             margin: 25px auto 15px auto; 
             width: 100%;
-            max-width: 320px; /* Чтобы цифры не разлетались слишком далеко */
+            max-width: 320px; 
         }
         
         .timer-box { text-align: center; flex: 1; }
@@ -731,28 +720,28 @@
             <p style="font-size: 14px; color: #555; margin-bottom: 20px;" data-aos="fade-up">Пожалуйста, пройдите регистрацию, чтобы мы подготовили для вас место на борту.</p>
             
             <div class="rsvp-form-container" data-aos="fade-up">
-                <form id="rsvpForm">
+                <form id="rsvpForm" action="https://formspree.io/f/meedknle" method="POST">
                     <div class="form-group">
                         <label>Имя и Фамилия пассажира</label>
-                        <input type="text" class="form-control" placeholder="Например: Иванов Иван" required>
+                        <input type="text" name="Имя_и_Фамилия" class="form-control" placeholder="Например: Иванов Иван" required>
                     </div>
                     
                     <div class="form-group">
                         <label>Статус билета</label>
-                        <select class="form-control" required>
+                        <select name="Статус_присутствия" class="form-control" required>
                             <option value="" disabled selected>Выберите вариант посадки...</option>
-                            <option value="solo">Занимаю одно кресло (буду один/одна)</option>
-                            <option value="pair">Бронирую два соседних кресла (буду с +1)</option>
-                            <option value="no">Остаюсь на земле (не смогу присутствовать)</option>
+                            <option value="Буду один/одна">Занимаю одно кресло (буду один/одна)</option>
+                            <option value="Буду с +1">Бронирую два соседних кресла (буду с +1)</option>
+                            <option value="Не смогу присутствовать">Остаюсь на земле (не смогу присутствовать)</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Напитки во время полета</label>
-                        <input type="text" class="form-control" placeholder="Шампанское, вино, крепкое, сок..." required>
+                        <input type="text" name="Напитки" class="form-control" placeholder="Шампанское, вино, крепкое, сок..." required>
                     </div>
 
-                    <button type="button" class="btn-register" onclick="alert('Спасибо! Регистрация на рейс успешно пройдена.')">Подтвердить полет</button>
+                    <button type="submit" class="btn-register">Подтвердить полет</button>
                 </form>
             </div>
         </section>
