@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свадьбу — Павел и Виктория</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --sage: #7d8f78;        
+            --sage-dark: #5c6b57;   
+            --sage-light: #f3f5f2;  
+            --text-dark: #3a3a3a;   
+            --white: #ffffff;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e9ece8;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Контейнер в виде телефона */
+        .phone-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #fdfdfd;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden; 
+        }
+
+        /* КАРТА МИРА НА ФОНЕ */
+        .phone-container::before {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0;
+            /* Ссылка на сгенерированную карту */
+            background-image: url('http://googleusercontent.com/image_generation_content/6');
+            background-size: cover; 
+            background-position: center 20%;
+            background-repeat: repeat-y;
+            opacity: 0.6; /* Легкая прозрачность, чтобы не перебивать текст */
+            z-index: 0;
+            pointer-events: none;
+            mix-blend-mode: multiply; /* Для красивого наложения на фон */
+        }
+
+        section {
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            z-index: 1; /* Чтобы контент был поверх карты */
+        }
+
+        h1, h2, h3, h4 { 
+            font-family: 'Playfair Display', serif; 
+            font-weight: normal; 
+        }
+
+        /* ==========================================================================
+           1. ЗАГЛАВНЫЙ ЭКРАН С АНИМАЦИЕЙ
+           ========================================================================== */
+        .welcome-screen {
+            height: 100vh;
+            position: relative;
+            background: transparent; /* Чтобы было видно карту */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px 80px 20px;
+            z-index: 1;
+        }
+
+        .welcome-screen::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 200px;
+            background: radial-gradient(circle at top right, rgba(125,143,120,0.15) 0%, transparent 60%),
+                        radial-gradient(circle at top left, rgba(125,143,120,0.1) 0%, transparent 60%);
+            z-index: -1;
+        }
+
+        .welcome-center {
+            margin: auto 0;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60%;
+        }
+
+        .text-group {
+            position: relative;
+            z-index: 5;
+            margin-top: -30px; 
+        }
+
+        .w-top-text {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .w-main-title {
+            font-size: 64px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .heart-path-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 280px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-path {
+            width: 100%;
+            height: 100%;
+            stroke: #a8b5a5;
+            stroke-dasharray: 8,8;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .animated-plane {
+            position: absolute;
+            top: 0; 
+            left: 0;
+            color: var(--sage-dark);
+            font-size: 22px;
+            offset-path: path('M 150,250 C 50,160 -10,80 40,30 C 90,-20 150,40 150,60 C 150,40 210,-20 260,30 C 310,80 250,160 150,250 Z');
+            offset-anchor: 50% 50%;
+            animation: flyThroughHeart 8s linear infinite;
+        }
+
+        .animated-plane i {
+            transform: rotate(-45deg); 
+            display: block;
+        }
+
+        @keyframes flyThroughHeart {
+            0% { offset-distance: 0%; }
+            100% { offset-distance: 100%; }
+        }
+
+        .badge-names {
+            background-color: rgba(125, 143, 120, 0.2);
+            padding: 12px 30px;
+            border-radius: 50px;
+            z-index: 2;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: var(--sage-dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .btn-open-ticket {
+            z-index: 3;
+            background: var(--sage-dark);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(92, 107, 87, 0.3);
+            transition: transform 0.3s ease, opacity 0.4s ease;
+        }
+
+        .btn-open-ticket:active {
+            transform: scale(0.95);
+        }
+
+        /* ==========================================================================
+           2. СКРЫТЫЙ БЛОК БИЛЕТА
+           ========================================================================== */
+        #ticket-content {
+            display: none; 
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .boarding-header {
+            background-color: rgba(125, 143, 120, 0.95); 
+            color: var(--white);
+            padding: 50px 20px 70px 20px;
+            text-align: center;
+        }
+        .static-plane { color: var(--white); font-size: 32px; margin-bottom: 10px; }
+        .welcome-tag { font-size: 16px; letter-spacing: 2px; font-weight: 400; margin-bottom: 5px; }
+        .main-title { font-size: 14px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; opacity: 0.9; }
+        .couple-names { font-size: 24px; font-family: 'Playfair Display', serif; border-top: 1px solid rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.4); padding: 15px 0; margin: 0 20px; }
+
+        .flight-manifest {
+            background: rgba(255, 255, 255, 0.95); 
+            margin: -40px 20px 0 20px; border-radius: 12px; padding: 25px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; position: relative; z-index: 10;
+        }
+        .manifest-item .lbl { font-size: 10px; text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 3px; }
+        .manifest-item .val { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+
+        /* ==========================================================================
+           3. ДОПОЛНИТЕЛЬНЫЙ БЛОК: ПРИВЕТСТВИЕ И КАЛЕНДАРЬ
+           ========================================================================== */
+        .intro-text-block {
+            padding: 50px 20px 30px;
+            text-align: center;
+            background-color: transparent; 
+        }
+        .intro-greeting {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 38px;
+            color: var(--sage-dark);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+        .intro-message {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        .calendar-card {
+            border: 1px solid rgba(211, 217, 208, 0.8);
+            border-radius: 24px;
+            padding: 30px 15px;
+            background: rgba(255, 255, 255, 0.92);
+            margin: 0 15px 30px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+        .cal-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .cal-title-en { font-size: 10px; letter-spacing: 2px; color: #888; display: block; text-transform: uppercase; }
+        .cal-title-ru { font-size: 12px; letter-spacing: 2px; color: var(--text-dark); display: block; text-transform: uppercase; margin-bottom: 8px;}
+        .cal-plane-icon { color: #d3d9d0; font-size: 20px; transform: rotate(45deg); margin-bottom: 15px;}
+        
+        .cal-month {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 42px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px 5px;
+            text-align: center;
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+        .cal-day-name {
+            font-size: 12px;
+            color: #888;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .cal-day {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 35px;
+            position: relative;
+        }
+        .cal-day.highlight {
+            font-weight: 600;
+            color: var(--text-dark);
+            z-index: 2;
+        }
+        .cal-heart {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            stroke: var(--sage-dark);
+            stroke-width: 1.5px;
+            fill: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -48%);
+            z-index: -1;
+        }
+
+        /* ==========================================================================
+           4. ХРОНОЛОГИЯ ПОЛЕТА
+           ========================================================================== */
+        .timeline-section { 
+            background-color: rgba(243, 245, 242, 0.85); 
+            padding-top: 60px; 
+            padding-bottom: 40px; 
+        }
+        .section-title { 
+            font-size: 26px; 
+            color: var(--text-dark); 
+            margin-bottom: 50px; 
+        }
+        
+        .custom-timeline { 
+            position: relative; 
+            margin: 0 auto; 
+            padding: 10px 0; 
+        }
+        
+        .custom-timeline::before { 
+            content: ''; 
+            position: absolute; 
+            left: 50%; 
+            top: 0; 
+            bottom: 0; 
+            width: 1.5px; 
+            background-color: var(--sage-dark); 
+            transform: translateX(-50%); 
+            opacity: 0.4;
+        }
+        
+        .timeline-row { 
+            display: flex; 
+            align-items: flex-start; 
+            margin-bottom: 60px; 
+            position: relative; 
+            width: 100%; 
+        }
+
+        .timeline-row:last-child { margin-bottom: 0; }
+        
+        .timeline-col { 
+            flex: 1; 
+            width: 50%; 
+            padding: 0 15px; 
+            position: relative; 
+            z-index: 3; 
+        }
+        
+        .timeline-icon-wrap { display: flex; align-items: center; }
+        .timeline-icon-wrap svg { width: 55px; height: 55px; fill: none; stroke: #665b53; stroke-width: 1.3; }
+        
+        .timeline-col.left { text-align: right; }
+        .timeline-col.right { text-align: left; }
+
+        .timeline-row:nth-child(odd) .timeline-icon-wrap { justify-content: flex-end; padding-right: 15px; }
+        .timeline-row:nth-child(even) .timeline-icon-wrap { justify-content: flex-start; padding-left: 15px; }
+        
+        .step-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--text-dark); margin-bottom: 6px; }
+        .step-desc { font-size: 12px; color: #666; line-height: 1.5; }
+
+        .time-connect { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .timeline-row:nth-child(odd) .time-connect { justify-content: flex-start; }
+        .timeline-row:nth-child(even) .time-connect { justify-content: flex-end; }
+        
+        .dashed-line { flex-grow: 1; border-bottom: 1px dashed var(--sage-dark); height: 1px; opacity: 0.6; }
+        .step-time { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-dark); white-space: nowrap; }
+
+        /* ==========================================================================
+           5. ОСТАЛЬНЫЕ БЛОКИ
+           ========================================================================== */
+        .info-block { margin-bottom: 35px; }
+        .info-block p { font-size: 14px; line-height: 1.6; color: #555; max-width: 90%; margin: 0 auto; }
+        .info-block .icon-circle { width: 50px; height: 50px; background-color: var(--sage); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin: 0 auto; box-shadow: 0 0 0 6px rgba(243, 245, 242, 0.7); }
+        .rule-subtitle { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 10px; color: var(--sage-dark); text-transform: uppercase; letter-spacing: 2px; }
+        .dots-divider { color: #ccc; letter-spacing: 15px; font-size: 24px; margin: 30px 0; }
+
+        .rsvp-form-container {
+            background-color: rgba(243, 245, 242, 0.95);
+            padding: 35px 20px;
+            border-radius: 16px;
+            text-align: left;
+            margin: 10px 0 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            border: 1px solid rgba(125, 143, 120, 0.2);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; color: var(--sage-dark); }
+        .form-control { width: 100%; padding: 14px; border: 1px solid #d3d9d0; border-radius: 8px; font-family: inherit; font-size: 14px; background-color: var(--white); color: var(--text-dark); transition: border-color 0.3s ease; }
+        .form-control:focus { outline: none; border-color: var(--sage); }
+        .btn-register { background-color: var(--sage-dark); color: white; border: none; width: 100%; padding: 16px; border-radius: 30px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 5px 15px rgba(92, 107, 87, 0.2); margin-top: 10px; }
+        .btn-register:active { transform: scale(0.97); }
+
+        .photo-container { width: 100%; border-radius: 16px; overflow: hidden; margin: 20px 0 30px; background-color: #ddd; display: flex; justify-content: center; }
+        .photo-container img { width: 100%; height: auto; max-height: 480px; object-fit: cover; object-position: center center; display: block; }
+
+        .contacts-grid { display: flex; justify-content: space-around; margin-top: 20px; }
+        .contact-box { text-align: center; }
+        .contact-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px;}
+        .contact-name { font-size: 16px; font-weight: 600; color: var(--text-dark); display: block;}
+        
+        .contact-phone { display: inline-block; margin-top: 25px; text-decoration: none; color: var(--text-dark); font-size: 18px; font-weight: 600; letter-spacing: 1px; }
+        .contact-phone i { color: var(--sage-dark); margin-right: 8px; }
+
+        /* ИДЕАЛЬНОЕ ВЫРАВНИВАНИЕ ПОДВАЛА ПО ЦЕНТРУ */
+        .footer-plane { 
+            background-color: var(--sage-dark); 
+            color: white; 
+            padding: 50px 15px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .footer-plane h2 {
+            font-size: 24px;
+            margin: 0 auto;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .timer-display { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            gap: 12px; 
+            margin: 25px auto 15px auto; 
+            width: 100%;
+            max-width: 320px; /* Чтобы цифры не разлетались слишком далеко */
+        }
+        
+        .timer-box { text-align: center; flex: 1; }
+        .t-num { font-family: 'Playfair Display', serif; font-size: 28px; display: block;}
+        .t-lbl { font-size: 10px; text-transform: uppercase; opacity: 0.8; letter-spacing: 1px;}
+        
+        .footer-date { 
+            font-size: 13px; 
+            opacity: 0.7; 
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+
+    <div class="welcome-screen" data-aos="fade-in">
+        
+        <div class="welcome-center">
+            <div class="text-group">
+                <div class="w-top-text" data-aos="fade-down">Welcome</div>
+                <div class="w-top-text" style="font-size: 11px; letter-spacing: 2px;" data-aos="fade-down" data-aos-delay="100">To The</div>
+                <h1 class="w-main-title" data-aos="zoom-in" data-aos-delay="200">Wedding</h1>
+            </div>
+
+            <div class="heart-path-container">
+                <svg class="heart-path" viewBox="0 0 300 280">
+                    <path d="M 150,250 C 50,160 -10,80 40,30 C 90,-20 150,40 150,60 C 150,40 210,-20 260,30 C 310,80 250,160 150,250 Z"/>
+                </svg>
+                <div class="animated-plane">
+                    <i class="fa-solid fa-plane"></i>
+                </div>
+            </div>
+        </div>
+
+        <div style="z-index: 2; text-align: center;">
+            <div class="badge-names" data-aos="fade-up" data-aos-delay="400">
+                Билет на свадьбу<br>Павла и Виктории
+            </div>
+
+            <button id="openBtn" class="btn-open-ticket" data-aos="fade-up" data-aos-delay="500" onclick="revealTicket(event)">
+                Открыть билет <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="ticket-content">
+        
+        <header class="boarding-header">
+            <div class="static-plane"><i class="fa-solid fa-plane-departure"></i></div>
+            <div class="welcome-tag">Boarding Pass</div>
+            <div class="main-title">Посадочный Талон</div>
+            <div class="couple-names">Павел & Виктория</div>
+        </header>
+
+        <div class="flight-manifest" data-aos="fade-up">
+            <div class="manifest-item">
+                <div class="lbl">Рейс:</div>
+                <div class="val">WED-2026</div>
+            </div>
+            <div class="manifest-item">
+                <div class="lbl">Пилоты:</div>
+                <div class="val">Павел & Виктория</div>
+            </div>
+            <div class="manifest-item">
+                <div class="lbl">Вылет:</div>
+                <div class="val">Холостая жизнь</div>
+            </div>
+            <div class="manifest-item">
+                <div class="lbl">Прибытие:</div>
+                <div class="val">Счастливый брак</div>
+            </div>
+        </div>
+
+        <section class="intro-text-block">
+            <h2 class="intro-greeting" data-aos="fade-up">Дорогие родные<br>и друзья!</h2>
+            <p class="intro-message" data-aos="fade-up">
+                Вы получили билет на полет вместе с нами.<br><br>
+                Ведь случится самое главное событие года — мы женимся!
+            </p>
+
+            <div class="calendar-card" data-aos="fade-up">
+                <div class="cal-header">
+                    <span class="cal-title-en">DATE</span>
+                    <span class="cal-title-ru">ДАТА</span>
+                    <i class="fa-solid fa-plane cal-plane-icon"></i>
+                </div>
+                
+                <h3 class="cal-month">Август</h3>
+                
+                <div class="cal-grid">
+                    <div class="cal-day-name">ПН</div>
+                    <div class="cal-day-name">ВТ</div>
+                    <div class="cal-day-name">СР</div>
+                    <div class="cal-day-name">ЧТ</div>
+                    <div class="cal-day-name">ПТ</div>
+                    <div class="cal-day-name">СБ</div>
+                    <div class="cal-day-name">ВС</div>
+
+                    <div class="cal-day"></div>
+                    <div class="cal-day"></div>
+                    <div class="cal-day"></div>
+                    <div class="cal-day"></div>
+                    <div class="cal-day"></div>
+
+                    <div class="cal-day">1</div>
+                    <div class="cal-day">2</div>
+                    <div class="cal-day">3</div>
+                    <div class="cal-day">4</div>
+                    <div class="cal-day">5</div>
+                    
+                    <div class="cal-day highlight">
+                        6
+                        <svg class="cal-heart" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+
+                    <div class="cal-day">7</div>
+                    <div class="cal-day">8</div>
+                    <div class="cal-day">9</div>
+                    <div class="cal-day">10</div>
+                    <div class="cal-day">11</div>
+                    <div class="cal-day">12</div>
+                    <div class="cal-day">13</div>
+                    <div class="cal-day">14</div>
+                    <div class="cal-day">15</div>
+                    <div class="cal-day">16</div>
+                    <div class="cal-day">17</div>
+                    <div class="cal-day">18</div>
+                    <div class="cal-day">19</div>
+                    <div class="cal-day">20</div>
+                    <div class="cal-day">21</div>
+                    <div class="cal-day">22</div>
+                    <div class="cal-day">23</div>
+                    <div class="cal-day">24</div>
+                    <div class="cal-day">25</div>
+                    <div class="cal-day">26</div>
+                    <div class="cal-day">27</div>
+                    <div class="cal-day">28</div>
+                    <div class="cal-day">29</div>
+                    <div class="cal-day">30</div>
+                    <div class="cal-day">31</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <h2 class="section-title" data-aos="fade-up">Программа дня</h2>
+            
+            <div class="custom-timeline">
+                
+                <div class="timeline-row">
+                    <div class="timeline-col left" data-aos="fade-right">
+                        <div class="timeline-icon-wrap">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/><path d="M15 9l1-2 2 1-1 1z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="timeline-col right" data-aos="fade-left">
+                        <div class="step-title">Регистрация</div>
+                        <div class="time-connect">
+                            <div class="dashed-line"></div>
+                            <div class="step-time">14:40</div>
+                        </div>
+                        <div class="step-desc">г. Тверь, Свободный переулок, д. 5.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-row">
+                    <div class="timeline-col left" data-aos="fade-right">
+                        <div class="step-title" style="text-align: right;">Свадебный банкет</div>
+                        <div class="time-connect">
+                            <div class="step-time">16:00</div>
+                            <div class="dashed-line"></div>
+                        </div>
+                        <div class="step-desc" style="text-align: right;">г. Тверь, Петербургское<br>шоссе, д.&nbsp;130.</div>
+                    </div>
+                    <div class="timeline-col right" data-aos="fade-left">
+                        <div class="timeline-icon-wrap">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="5"/><path d="M5 8v5c0 1 1 2 2 2v4M19 8v11M17 8v4"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-row">
+                    <div class="timeline-col left" data-aos="fade-right">
+                        <div class="timeline-icon-wrap">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 19h14v2H5zM6 13h12v4H6zM8 8h8v3H8zM12 4c.5 0 1 .5 1 1s-.5 2-1 2-1-1.5-1-2 .5-1 1-1"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="timeline-col right" data-aos="fade-left">
+                        <div class="step-title">Торт</div>
+                        <div class="time-connect">
+                            <div class="dashed-line"></div>
+                            <div class="step-time">21:00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-row">
+                    <div class="timeline-col left" data-aos="fade-right">
+                        <div class="step-title" style="text-align: right;">Окончание вечера</div>
+                        <div class="time-connect">
+                            <div class="step-time">23:00</div>
+                            <div class="dashed-line"></div>
+                        </div>
+                    </div>
+                    <div class="timeline-col right" data-aos="fade-left">
+                        <div class="timeline-icon-wrap">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section style="background-color: transparent; padding-top: 40px;">
+            <h2 class="section-title" data-aos="fade-up">Карта проезда</h2>
+            <div style="width:100%; height:300px; border-radius:16px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05);" data-aos="zoom-in">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=35.9006%2C56.8584&z=14&pt=35.9006,56.8584,pm2rdl" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe>
+            </div>
+        </section>
+
+        <section style="background-color: transparent;">
+            <h2 class="section-title" data-aos="fade-up" style="margin-bottom: 30px;">Правила провоза багажа</h2>
+            
+            <div class="info-block" data-aos="fade-up">
+                <div class="icon-circle" style="margin-bottom: 20px;"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <h3 class="rule-subtitle">Подарки</h3>
+                <p>Будем признательны за вклад в наш будущий семейный бюджет в конвертах. Это сильно облегчит ручную кладь.</p>
+            </div>
+
+            <div class="info-block" data-aos="fade-up">
+                <div class="icon-circle" style="margin-bottom: 20px;"><i class="fa-solid fa-seedling"></i></div>
+                <h3 class="rule-subtitle">Цветы на борту</h3>
+                <p>Просим воздержаться от покупки букетов, так как сразу после праздника мы отправляемся в путешествие.</p>
+            </div>
+
+            <div class="dots-divider">•••</div>
+
+            <div class="info-block" data-aos="fade-up">
+                <div class="icon-circle" style="margin-bottom: 20px;"><i class="fa-solid fa-shirt"></i></div>
+                <h2 class="section-title" style="margin-bottom: 15px; font-size: 24px;">Дресс-код</h2>
+                <p>Мы очень ждём и готовимся к нашему незабываемому дню! Поддержите нас Вашими улыбками, объятиями, а также красивыми и удобными нарядами.</p>
+            </div>
+        </section>
+
+        <section style="background-color: transparent; border-top: 1px solid rgba(125, 143, 120, 0.2);">
+            <h2 class="section-title" data-aos="fade-up">Регистрация на рейс</h2>
+            <p style="font-size: 14px; color: #555; margin-bottom: 20px;" data-aos="fade-up">Пожалуйста, пройдите регистрацию, чтобы мы подготовили для вас место на борту.</p>
+            
+            <div class="rsvp-form-container" data-aos="fade-up">
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label>Имя и Фамилия пассажира</label>
+                        <input type="text" class="form-control" placeholder="Например: Иванов Иван" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Статус билета</label>
+                        <select class="form-control" required>
+                            <option value="" disabled selected>Выберите вариант посадки...</option>
+                            <option value="solo">Занимаю одно кресло (буду один/одна)</option>
+                            <option value="pair">Бронирую два соседних кресла (буду с +1)</option>
+                            <option value="no">Остаюсь на земле (не смогу присутствовать)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Напитки во время полета</label>
+                        <input type="text" class="form-control" placeholder="Шампанское, вино, крепкое, сок..." required>
+                    </div>
+
+                    <button type="button" class="btn-register" onclick="alert('Спасибо! Регистрация на рейс успешно пройдена.')">Подтвердить полет</button>
+                </form>
+            </div>
+        </section>
+
+        <section style="background-color: rgba(243, 245, 242, 0.7);">
+            <h2 class="section-title" data-aos="fade-up">Ваши пилоты</h2>
+            
+            <div class="photo-container" data-aos="zoom-in">
+                <img src="https://sun9-30.vkuserphoto.ru/s/v1/ig2/bOC7oQO_4r8a64GR9i8SpFPb2xd69DA1Y8N1MLFL2Hqcm_ioDDE9LH5RtN58Ers-maeEuRszQ-ABvSr_L0cfKah1.jpg?quality=95&as=32x57,48x85,72x128,108x192,160x284,240x427,360x640,480x853,540x960,640x1138,720x1280&from=bu&u=AnUTMC3M3ZKTx6zSj_HVIInBSfTcYBcdCcC6_urtsKc&cs=640x0" alt="Павел и Виктория">
+            </div>
+
+            <h2 class="section-title" style="margin-bottom: 20px; font-size: 22px;" data-aos="fade-up">Служба поддержки</h2>
+            <div class="contacts-grid">
+                <div class="contact-box" data-aos="fade-up">
+                    <span class="contact-label">Невеста</span>
+                    <span class="contact-name">Виктория</span>
+                </div>
+                <div class="contact-box" data-aos="fade-up" data-aos-delay="100">
+                    <span class="contact-label">Жених</span>
+                    <span class="contact-name">Павел</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center;" data-aos="fade-up" data-aos-delay="200">
+                <a href="tel:+79190653245" class="contact-phone"><i class="fa-solid fa-phone"></i> +7 (919) 065-32-45</a>
+            </div>
+        </section>
+
+        <footer class="footer-plane">
+            <h2>До вылета осталось</h2>
+            
+            <div class="timer-display" data-aos="fade-up">
+                <div class="timer-box">
+                    <span class="t-num" id="d-val">00</span>
+                    <span class="t-lbl">Дней</span>
+                </div>
+                <div class="timer-box">
+                    <span class="t-num" id="h-val">00</span>
+                    <span class="t-lbl">Часов</span>
+                </div>
+                <div class="timer-box">
+                    <span class="t-num" id="m-val">00</span>
+                    <span class="t-lbl">Минут</span>
+                </div>
+                <div class="timer-box">
+                    <span class="t-num" id="s-val">00</span>
+                    <span class="t-lbl">Секунд</span>
+                </div>
+            </div>
+
+            <div class="footer-date">August 6, 2026 at 14:40</div>
+        </footer>
+
+    </div> 
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 30
+    });
+
+    function revealTicket(e) {
+        e.preventDefault();
+        const content = document.getElementById('ticket-content');
+        const btn = document.getElementById('openBtn');
+        
+        content.style.display = 'block';
+        
+        setTimeout(() => {
+            content.style.opacity = '1';
+            AOS.refresh(); 
+            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+
+        btn.style.opacity = '0';
+        setTimeout(() => {
+            btn.style.display = 'none';
+        }, 400);
+    }
+
+    const flightTime = new Date(2026, 7, 6, 14, 40, 0).getTime();
+
+    function countdown() {
+        const now = new Date().getTime();
+        const diff = flightTime - now;
+
+        if (diff > 0) {
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('d-val').innerText = d;
+            document.getElementById('h-val').innerText = h;
+            document.getElementById('m-val').innerText = m;
+            document.getElementById('s-val').innerText = s;
+        }
+    }
+    
+    setInterval(countdown, 1000);
+    countdown();
+</script>
+
+</body>
+</html>
