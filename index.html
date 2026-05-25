@@ -49,25 +49,6 @@
             overflow: hidden; 
         }
 
-        /* Общая КАРТА МИРА НА ФОНЕ */
-        .phone-container::after {
-            content: '';
-            position: absolute;
-            top: 15%; 
-            left: 0; 
-            right: 0; 
-            bottom: 0;
-            background-image: url('https://w7.pngwing.com/pngs/244/484/png-transparent-united-states-world-map-globe-world-map-miscellaneous-grass-world.png');
-            background-size: cover; 
-            background-position: center;
-            background-repeat: no-repeat; 
-            opacity: 0.15; 
-            filter: sepia(100%) hue-rotate(75deg) saturate(60%) brightness(110%);
-            z-index: 0;
-            pointer-events: none;
-            mix-blend-mode: multiply; 
-        }
-
         section {
             padding: 40px 25px;
             text-align: center;
@@ -80,7 +61,9 @@
             font-weight: normal; 
         }
 
-        /* ЗАГЛАВНЫЙ ЭКРАН С ПРАВИЛЬНОЙ КАРТОЙ */
+        /* ==========================================================================
+           1. ЗАГЛАВНЫЙ ЭКРАН (ТУТ ТЕПЕРЬ ТОЧНО ВАША КАРТИНКА)
+           ========================================================================== */
         .welcome-screen {
             height: 100vh;
             position: relative;
@@ -91,23 +74,20 @@
             padding: 50px 20px 80px 20px;
             z-index: 5; 
             overflow: hidden;
-            background-color: var(--sage-light); 
+            background-color: var(--sage-light); /* Цвет фона шалфейный */
         }
 
         .welcome-screen::before {
             content: '';
             position: absolute;
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            bottom: 0;
-            /* Та самая карта из вашего запроса */
-            background-image: url('https://play-lh.googleusercontent.com/ZqOeiKEWPGdBrFUbe5p774Wgynn2-G_7pz0b3nqCCdFskrnZRVnx9xS2f4NKq8DGkhmT=w3840-h2160');
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* ПУТЬ К ВАШЕМУ ФАЙЛУ */
+            background-image: url('image_2868a2.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.25; 
-            mix-blend-mode: multiply; 
+            opacity: 0.35; /* Прозрачность, чтобы не мешать тексту */
+            mix-blend-mode: multiply; /* Смешивает с шалфейным цветом */
             z-index: -1;
         }
 
@@ -226,7 +206,9 @@
             transform: scale(0.95);
         }
 
-        /* СКРЫТЫЙ БЛОК БИЛЕТА */
+        /* ==========================================================================
+           2. СКРЫТЫЙ БЛОК БИЛЕТА
+           ========================================================================== */
         #ticket-content {
             display: none; 
             opacity: 0;
@@ -253,9 +235,30 @@
         .manifest-item .lbl { font-size: 10px; text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 3px; }
         .manifest-item .val { font-size: 14px; font-weight: 600; color: var(--text-dark); }
 
-        .intro-text-block { padding: 50px 20px 30px; text-align: center; background-color: transparent; }
-        .intro-greeting { font-family: 'Playfair Display', serif; font-style: italic; font-size: 38px; color: var(--sage-dark); margin-bottom: 25px; line-height: 1.2; }
-        .intro-message { font-family: 'Montserrat', sans-serif; font-size: 15px; color: #555; line-height: 1.6; margin-bottom: 40px; padding: 0 10px; }
+        /* ==========================================================================
+           3. ДОПОЛНИТЕЛЬНЫЙ БЛОК: ПРИВЕТСТВИЕ И КАЛЕНДАРЬ
+           ========================================================================== */
+        .intro-text-block {
+            padding: 50px 20px 30px;
+            text-align: center;
+            background-color: transparent; 
+        }
+        .intro-greeting {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 38px;
+            color: var(--sage-dark);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+        .intro-message {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
 
         .calendar-card {
             border: 1px solid rgba(211, 217, 208, 0.8);
@@ -276,11 +279,11 @@
         .cal-day-name { font-size: 12px; color: #888; font-weight: 500; margin-bottom: 10px; }
         .cal-day { display: flex; align-items: center; justify-content: center; height: 35px; position: relative; }
         .cal-day.highlight { font-weight: 600; color: var(--text-dark); z-index: 2; }
-        .cal-heart {
-            position: absolute; width: 42px; height: 42px; stroke: var(--sage-dark); stroke-width: 1.5px; fill: none;
-            top: 50%; left: 50%; transform: translate(-50%, -48%); z-index: -1;
-        }
+        .cal-heart { position: absolute; width: 42px; height: 42px; stroke: var(--sage-dark); stroke-width: 1.5px; fill: none; top: 50%; left: 50%; transform: translate(-50%, -48%); z-index: -1; }
 
+        /* ==========================================================================
+           4. ХРОНОЛОГИЯ ПОЛЕТА
+           ========================================================================== */
         .timeline-section { background-color: rgba(243, 245, 242, 0.85); padding-top: 60px; padding-bottom: 40px; }
         .section-title { font-size: 26px; color: var(--text-dark); margin-bottom: 50px; }
         
@@ -305,6 +308,9 @@
         .dashed-line { flex-grow: 1; border-bottom: 1px dashed var(--sage-dark); height: 1px; opacity: 0.6; }
         .step-time { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-dark); white-space: nowrap; }
 
+        /* ==========================================================================
+           5. ОСТАЛЬНЫЕ БЛОКИ
+           ========================================================================== */
         .info-block { margin-bottom: 35px; }
         .info-block p { font-size: 14px; line-height: 1.6; color: #555; max-width: 90%; margin: 0 auto; }
         .info-block .icon-circle { width: 50px; height: 50px; background-color: var(--sage); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin: 0 auto; box-shadow: 0 0 0 6px rgba(243, 245, 242, 0.7); }
@@ -324,6 +330,7 @@
 
         .photo-container { width: 100%; border-radius: 16px; overflow: hidden; margin: 20px 0 30px; background-color: #ddd; display: flex; justify-content: center; }
         .photo-container img { width: 100%; height: auto; max-height: 480px; object-fit: cover; object-position: center center; display: block; }
+
         .contacts-grid { display: flex; justify-content: space-around; margin-top: 20px; }
         .contact-box { text-align: center; }
         .contact-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px;}
@@ -331,7 +338,7 @@
         .contact-phone { display: inline-block; margin-top: 25px; text-decoration: none; color: var(--text-dark); font-size: 18px; font-weight: 600; letter-spacing: 1px; }
         .contact-phone i { color: var(--sage-dark); margin-right: 8px; }
 
-        .footer-plane { background-color: var(--sage-dark); color: white; padding: 50px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 2; }
+        .footer-plane { background-color: var(--sage-dark); color: white; padding: 50px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 2;}
         .footer-plane h2 { font-size: 24px; margin: 0 auto; text-align: center; width: 100%; }
         .timer-display { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 25px auto 15px auto; width: 100%; max-width: 320px; }
         .timer-box { text-align: center; flex: 1; }
@@ -366,6 +373,7 @@
             <div class="badge-names" data-aos="fade-up" data-aos-delay="400">
                 Билет на свадьбу<br>Павла и Виктории
             </div>
+
             <button id="openBtn" class="btn-open-ticket" data-aos="fade-up" data-aos-delay="500" onclick="revealTicket(event)">
                 Открыть билет <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i>
             </button>
